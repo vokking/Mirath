@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ملخص مخيم ميراث العلمي — أصول التفسير والتدبّر · فقه الإيمان</title>
+
+  <!-- خطوط عربية -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Naskh+Arabic:wght@300;400;600&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --site-bg: #F6EFE6;      /* شاي بالحليب */
+      --paper: #FFF9F3;
+      --brown: #5B3A29;
+      --muted: #6B625A;
+      --dark: #2f241d;
+      --accent: #C8A78B;
+      --quran-color: #0b5c3a;  /* لون الآيات */
+      --max-w: 1100px;
+      --gap: 22px;
+      --sidebar-width: 300px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,var(--site-bg), #F2E9DE);
+      font-family: "Noto Naskh Arabic", "Amiri", serif;
+      color:var(--dark);
+      direction:rtl;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.85;
+      padding:16px;
+    }
+
+    .container{max-width:var(--max-w);margin:0 auto;position:relative}
+
+    header.site-header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0 18px}
+    .branding .main-title{
+      font-family:'Tajawal',sans-serif;color:var(--brown);font-size:26px;margin:0;
+    }
+    .branding .subtitle{color:var(--muted);margin-top:6px;font-size:14px}
+
+    /* Toggle button */
+    .toc-toggle{
+      background:var(--brown);
+      color:#fff;
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(91,58,41,0.12);
+    }
+
+    /* Layout: content with hidden sidebar */
+    .wrap{display:block}
+    main.content{max-width:var(--max-w);margin:0 auto}
+
+    .section-title{
+      display:inline-block;padding:8px 14px;border-radius:10px;
+      background:linear-gradient(90deg, rgba(200,167,139,0.09), transparent);
+      color:var(--brown);font-family:'Tajawal',sans-serif;font-size:20px;margin:8px 0;
+    }
+
+    /* Page card - stacked, separated */
+    .page{
+      background:var(--paper);
+      border-radius:12px;
+      box-shadow:0 14px 40px rgba(46,34,28,0.06);
+      padding:22px;
+      margin-bottom:var(--gap);
+      border-left:6px solid transparent;
+      overflow:hidden;
+    }
+    /* Distinguish sections by left border color */
+    .page.tafsir{border-left-color: rgba(200,167,139,0.35)}
+    .page.iman{border-left-color: rgba(91,58,41,0.18)}
+
+    .page header h3{
+      margin:0 0 8px 0;color:var(--brown);font-family:'Tajawal',sans-serif;font-size:16px;
+    }
+
+    .content p{margin:10px 0;color:var(--dark);font-size:16px;white-space:pre-wrap}
+    .content ul{margin:8px 0 8px 18px}
+    .content li{margin:6px 0}
+
+    /* Quranic verse styling: clearer Quranic font + different color */
+    .quran{
+      display:block;
+      font-family:'Amiri', serif;
+      color:var(--quran-color);
+      font-size:19px;
+      line-height:1.95;
+      background: rgba(11,92,58,0.04);
+      padding:10px 12px;
+      border-radius:8px;
+      margin:10px 0;
+      border-left:4px solid rgba(11,92,58,0.12);
+      direction:rtl;
+    }
+
+    /* Sidebar overlay (hidden by default) */
+    .sidebar-overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,0.35);
+      display:none;
+      z-index:60;
+    }
+    .sidebar{
+      width:var(--sidebar-width);
+      position:fixed;
+      top:24px;
+      bottom:24px;
+      right:calc(-1 * var(--sidebar-width));
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,250,245,0.98));
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 20px 60px rgba(46,34,28,0.18);
+      z-index:70;
+      overflow:auto;
+      transition: right 0.28s ease;
+      font-family:'Tajawal',sans-serif;
+    }
+    .sidebar.open{right:24px}
+    .sidebar h3{margin:0 0 8px 0;color:var(--brown);font-size:16px}
+    .sidebar nav ul{list-style:none;padding:0;margin:0}
+    .sidebar nav a{
+      display:block;padding:8px 10px;border-radius:8px;color:var(--dark);text-decoration:none;margin-bottom:6px;font-size:14px
+    }
+    .sidebar nav a:hover{background:rgba(200,167,139,0.08)}
+
+    /* Page footer numbers/text */
+    .page-footer{
+      margin-top:16px;color:var(--muted);font-size:13px;border-top:1px solid rgba(47,34,28,0.04);padding-top:10px;text-align:left
+    }
+
+    footer.book-footer{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin:18px 0 60px;padding:4px 0}
+
+    /* Responsive */
+    @media (max-width:980px){
+      header.site-header{flex-direction:column;align-items:flex-start;gap:12px}
+      .sidebar{right:-100%;left:auto;top:16px;bottom:16px;width:calc(100% - 48px)}
+      .sidebar.open{right:24px}
+    }
+
+    @media print{
+      body{background:#fff}
+      .sidebar, .toc-toggle, .sidebar-overlay {display:none}
+      .page{box-shadow:none;border-radius:0;padding:12mm;margin:0 0 8mm 0}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="branding">
+        <h1 class="main-title">ملخص مخيم ميراث العلمي</h1>
+        <div class="subtitle">أصول التفسير والتدبّر · فقه الإيمان</div>
+      </div>
+
+      <div>
+        <button class="toc-toggle" id="openToc">الفهرس</button>
+      </div>
+    </header>
+
+    <!-- Sidebar overlay and panel -->
+    <div class="sidebar-overlay" id="overlay" aria-hidden="true"></div>
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
+      <h3>فهرس الموضوعات</h3>
+      <nav>
+        <ul>
+          <li><a href="#intro">أولًا: مدخل إلى علم التفسير</a></li>
+          <li><a href="#tafsir-tadabbur">ثانيًا: التفسير والتدبر</a></li>
+          <li><a href="#sources">ثالثًا: مصادر التفسير وأدواته</a></li>
+          <li><a href="#maki-madani">رابعًا: المكي والمدني</a></li>
+          <li><a href="#sura-ayah">خامسًا: السورة والآية</a></li>
+          <li><a href="#ajam">سادسًا: الألفاظ الأعجمية</a></li>
+          <li><a href="#fatiha">سابعًا: سورة الفاتحة</a></li>
+          <li><a href="#rules">ثامنًا: قواعد تفسيرية عامة</a></li>
+          <li><a href="#linguistic">تاسعًا: مسائل لغوية وعقدية</a></li>
+          <li><a href="#ibadah">عاشرًا: العبودية والاستعانة</a></li>
+          <li><a href="#hidaya">الحادي عشر: الهداية والصراط</a></li>
+          <li><a href="#examples">الثاني عشر: نماذج تطبيقية</a></li>
+          <li><a href="#conclusion">خاتمة</a></li>
+          <li><a href="#iman-1">فقه الإيمان — قيمة الإيمان</a></li>
+          <li><a href="#iman-2">أولوية علم الإيمان</a></li>
+          <li><a href="#iman-3">تعريف فقه الإيمان</a></li>
+          <li><a href="#iman-4">أثر الإيمان على الأعمال</a></li>
+          <li><a href="#iman-5">الإيمان أساس الدين</a></li>
+          <li><a href="#iman-6">مصدر الإيمان</a></li>
+          <li><a href="#iman-7">منهج التعامل مع القرآن</a></li>
+          <li><a href="#iman-8">طبيعة الإيمان</a></li>
+          <li><a href="#iman-9">خلاصة فقهية قصيرة</a></li>
+        </ul>
+      </nav>
+      <div style="margin-top:12px;text-align:left">
+        <button class="toc-toggle" id="closeToc" style="background:transparent;color:var(--muted);border:0;cursor:pointer">إغلاق ✕</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content" id="mainContent">
+
+      <!-- The content below is included verbatim from your supplied text and organized into anchors.
+           I did not change wording except for preserving formatting -- you asked to keep content as provided. -->
+
+      <section id="intro" class="page tafsir">
+        <header><h3>أولًا: مدخل إلى علم التفسير</h3></header>
+        <div class="content">
+1) مكانة تفسير ابن كثير
+ابن كثير: إمامٌ مشهور في علم التفسير. تفسيره من التفاسير التي: استعملت أدوات التفسير استعمالًا صحيحًا. ضبطت أصول التفسير وقواعده. عدم ضبط الأصول يؤدي إلى الانحراف في الفهم. لا يزال العلماء يحتفون بتفسير ابن كثير إلى يومنا هذا. من أفضل تهذيبات تفسير ابن كثير: كتاب المصباح المنير. يمتاز تفسيره بكثرة آثار السلف.
+        </div>
+        <footer class="page-footer">مدخل إلى علم التفسير</footer>
+      </section>
+
+      <section id="tafsir-tadabbur" class="page tafsir">
+        <header><h3>ثانيًا: التفسير والتدبر</h3></header>
+        <div class="content">
+1) معنى التفسير
+التفسير: بيان معاني ألفاظ القرآن الكريم.
+
+2) معنى التدبر
+التدبر: التعرض لمعاني الآيات ثم العمل بها. التدبر يأتي بعد التفسير، لا قبله. التدبر ليس خاصًّا بالعلماء وطلبة العلم. ترك التدبر نوع من هجر القرآن. كلما زاد العلم زادت إمكانية التدبر (كغوص الغواص). من مجالات التدبر: طرح الأسئلة. التدبر والتذكر لا بد أن يتلازما، وإلا فلا نفع. الانتفاع بالقرآن يثمر: إصلاح القلب. الفهم الصحيح لمعاني القرآن.
+        </div>
+        <footer class="page-footer">التفسير والتدبر</footer>
+      </section>
+
+      <section id="sources" class="page tafsir">
+        <header><h3>ثالثًا: مصادر التفسير وأدواته</h3></header>
+        <div class="content">
+1) الإسرائيليات جاءت عن طريق بعض الصحابة. يُستأنس بها في التفسير، ولا يُحتج بها استقلالًا.
+2) تفسير التابعين له مكانته في فهم النص القرآني.
+3) العلوم المساندة للتفسير أصول الفقه. النحو. الصرف. البلاغة.
+4) مراجع ذُكرت في المخيم كتاب: منهج الاستنباط من القرآن – نايف الزهراني. كتاب: الكفاية في علوم القرآن (PDF). الإشارة إلى برنامج/قناة “مفسر” في تيليجرام (كمصدر مساعد لا أصلي).
+        </div>
+        <footer class="page-footer">مصادر التفسير وأدواته</footer>
+      </section>
+
+      <section id="maki-madani" class="page tafsir">
+        <header><h33>رابعًا: المكي والمدني</h33></header>
+        <div class="content">
+المكي: ما نزل قبل الهجرة. 
+المدني: ما نزل بعد الهجرة. 
+من أهم فوائد معرفة المكي والمدني: معرفة الناسخ والمنسوخ. فهم أصول التشريع.
+        </div>
+        <footer class="page-footer">المكي والمدني</footer>
+      </section>
+
+      <section id="sura-ayah" class="page tafsir">
+        <header><h3>خامسًا: السورة والآية</h3></header>
+        <div class="content">
+1) تعريف السورة
+السورة: قرآنٌ مشتمل على آيات. أقل عدد آياتها: ثلاث. هي وحدة مستقلة، منفصلة عما قبلها وما بعدها. من معانيها: الارتفاع (لرفعة شأنها). السور المحيط. كل سورة لها وحدة موضوعية ومقصد عام. مثال (اجتهادي): سورة البقرة على كثرة موضوعاتها، لها مقصد كلي ومقاصد فرعية تصب في مسار واحد.
+
+2) تعريف الآية
+الآية: قرآن مركب من جمل، ولو تقديرًا، لها مطلع ومقطع، مندرجة في سورة.
+        </div>
+        <footer class="page-footer">السورة والآية</footer>
+      </section>
+
+      <section id="ajam" class="page tafsir">
+        <header><h3>سادسًا: الألفاظ الأعجمية في القرآن</h3></header>
+        <div class="content">
+لا يوجد في القرآن جمل أعجمية. توجد: أسماء أعلام أعجمية (مثل: إبراهيم). ألفاظ استعملها العرب فصارت عربية (مثل: جهنم). لا يوجد لفظ أعجمي صرف لا تعرفه العرب.
+        </div>
+        <footer class="page-footer">الألفاظ الأعجمية</footer>
+      </section>
+
+      <section id="fatiha" class="page tafsir">
+        <header><h3>سابعًا: سورة الفاتحة – التأصيل والمقاصد</h3></header>
+        <div class="content">
+1) مكانة الفاتحة
+سُمّيت أم القرآن؛ لاشتمالها على مقاصده. كثرة أسمائها تدل على شرفها. شُرع قراءتها في الصلاة 17 مرة يوميًا؛ لشدة الحاجة إليها.
+
+2) الرسائل الأربع الكبرى في الفاتحة
+1. التعريف بالمعبود.
+2. بيان طريق العبودية.
+3. بيان أحوال الناس في الطريق.
+4. افتتاح القرآن ببيان أصوله ومقاصده.
+
+3) موضوعات السورة
+التعريف بالله. اليوم الآخر. الحمد. إفراد الله بالعبادة. الهداية والصراط المستقيم. الربوبية الكاملة. صفات المنعَم عليهم (علم + عمل). طريق المغضوب عليهم (فساد العمل). طريق الضالين (فساد العلم).
+
+4) أصول علم السلوك المستفادة من الفاتحة
+1. العلم بالله.
+2. العلم باليوم الآخر.
+3. العلم بالإنسان.
+4. العلم بالأعمال.
+5. العلم بالصراط.
+6. العلم بالأعوان.
+7. العلم بالأعداء.
+        </div>
+        <footer class="page-footer">سورة الفاتحة</footer>
+      </section>
+
+      <section id="rules" class="page tafsir">
+        <header><h3>ثامنًا: قواعد تفسيرية عامة</h3></header>
+        <div class="content">
+الأصل حمل ألفاظ القرآن على الظاهر. إذا احتمل اللفظ أكثر من معنى دون تعارض، حُمل على الجميع. القرآن يعبر بألفاظ قليلة عن معانٍ كثيرة. قد تكون الآية لمعنى معين، وتحتمل معاني أخرى صحيحة في عمومها. تسمية السور قد تكون بأول آية فيها.
+        </div>
+        <footer class="page-footer">قواعد تفسيرية عامة</footer>
+      </section>
+
+      <section id="linguistic" class="page tafsir">
+        <header><h3>تاسعًا: مسائل لغوية وعقدية</h3></header>
+        <div class="content">
+الله: اسم خاص لا يُسمّى به غيره. الرحمن: على وزن فعلان (للمبالغة). الرحيم: صفة متعلقة بالمرحوم. الحمد: وصف المحمود بالكمال مع محبة وتعظيم. الشكر أخص من جهة ما يقع عليه، وأعم من جهة ما يقع به. العالمين: كل ما سوى الله. ربوبية الله قائمة على الرحمة، وهو المتصرف قولًا وفعلًا. الأصل حمل معاني القرآن على الظاهر.
+        </div>
+        <footer class="page-footer">مسائل لغوية وعقدية</footer>
+      </section>
+
+      <section id="ibadah" class="page tafsir">
+        <header><h3>عاشرًا: العبودية والاستعانة</h3></header>
+        <div class="content">
+قال الله عز وجل:
+<div class="quran">﴿إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ﴾ (سورة الفاتحة: 5)</div>
+
+العبادة شرعًا: انقياد مع الذل والخضوع بالطاعة. اسم جامع لكل ما يحبه الله ويرضاه من الأقوال والأفعال الظاهرة والباطنة. أركان العبادة: 1. كمال المحبة. 2. الخضوع. 3. الخوف. الاستعانة عبادة قلبية عظيمة. من آداب الدعاء: الثناء على الله قبل السؤال.
+        </div>
+        <footer class="page-footer">العبودية والاستعانة</footer>
+      </section>
+
+      <section id="hidaya" class="page tafsir">
+        <header><h3>الحادي عشر: الهداية والصراط</h3></header>
+        <div class="content">
+قال الله عز وجل:
+<div class="quran">﴿اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ﴾ (سورة الفاتحة: 6–7)</div>
+
+الهداية نوعان: هداية علم. هداية عمل (التثبيت). نحتاج إلى تكرار طلب الهداية دائمًا. لا يدخل الجنة أحد إلا بفضل الله.
+        </div>
+        <footer class="page-footer">الهداية والصراط</footer>
+      </section>
+
+      <section id="examples" class="page tafsir">
+        <header><h3>الثاني عشر: نماذج تطبيقية من سور أخرى</h3></header>
+        <div class="content">
+سورة الضحى
+الضحى: من ارتفاع الشمس إلى الزوال. الله لا يقسم إلا بعظيم. النقل والعقل دليلان صحيحان.
+
+قال الله عز وجل:
+<div class="quran">﴿وَاللَّيْلِ إِذَا سَجَى﴾ (سورة الضحى: 2)</div>
+
+قال الله عز وجل:
+<div class="quran">﴿أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ﴾ (سورة الشرح: 1)</div>
+
+الاستفهام إذا دخل على النفي أفاد التقرير. الذنوب أثقال. الأنبياء معصومون في تبليغ الوحي، ومعصومون من الكبائر. قال الله عز وجل:
+<div class="quran">﴿وَالَّذِينَ إِذَا فَعَلُوا فَاحِشَةً أَوْ ظَلَمُوا أَنْفُسَهُمْ ذَكَرُوا اللَّهَ فَاسْتَغْفَرُوا لِذُنُوبِهِمْ﴾ (سورة آل عمران: 135)</div>
+        </div>
+        <footer class="page-footer">نماذج تطبيقية</footer>
+      </section>
+
+      <section id="conclusion" class="page tafsir">
+        <header><h3>الخاتمة</h3></header>
+        <div class="content">
+قاعدة جامعة كلما اتبعتَ النبي ﷺ شرح الله صدرك.
+
+---
+
+أصول التفسير
+
+مدخل ومنهج
+
+أولًا: الإمام ابن كثير وتفسيره
+
+ابن كثير: إمامٌ مشهور في علم التفسير.
+
+تفسيره قائم على:
+
+استعمال أدوات التفسير استعمالًا صحيحًا.
+
+التأصيل وضبط الأصول.
+
+
+قاعدة: عدم ضبط الأصول يؤدي إلى الانحراف في الفهم.
+
+لا يزال العلماء يحتفون بتفسيره ويعتمدونه.
+
+من أفضل تهذيبات تفسير ابن كثير: المصباح المنير.
+
+تفسيره مشحون بآثار السلف، وهو من أعظم مزاياه.
+
+
+
+---
+
+ثانيًا: التدبر وعلاقته بالتفسير
+
+ما هو التدبر؟
+
+التدبر: التعرض لمعاني الآيات ثم العمل بها.
+
+ليس خاصًا بالعلماء أو طلاب العلم.
+
+ترك التدبر يُعد من هجر القرآن.
+
+كلما زاد العلم زادت القدرة على التدبر (تشبيه: الغوص).
+
+
+مجالات التدبر
+
+طرح الأسئلة.
+
+استحضار المقاصد.
+
+الجمع بين التدبر والتذكر، فلو انفصل أحدهما لم ينتفع.
+
+
+ثمرة الانتفاع بالقرآن
+
+> الانتفاع بالقرآن ⟶ إصلاح القلب ⟶ فهم معاني القرآن.
+
+
+
+قاعدة مهمة:
+التفسير قبل التدبر، لا تدبر بلا فهم.
+
+
+---
+
+ثالثًا: مصادر التفسير وأدواته
+
+الإسرائيليات
+
+وصلت عبر بعض الصحابة.
+
+يُستأنس بها في التفسير، لا يُحتج بها استقلالًا.
+
+
+تفسير التابعين
+
+له مكانته، ويُعتبر امتدادًا لتفسير الصحابة.
+
+
+العلوم المعينة على التفسير
+
+أصول الفقه.
+
+النحو.
+
+الصرف.
+
+البلاغة.
+
+
+مراجع ذُكرت
+
+منهج الاستنباط من القرآن – نايف الزهراني.
+
+
+
+---
+
+رابعًا: السور والآيات
+
+المكي والمدني
+
+المكي: ما نزل قبل الهجرة.
+
+المدني: ما نزل بعد الهجرة.
+
+من فوائد معرفتهما:
+
+معرفة الناسخ والمنسوخ.
+
+فهم أصول التشريع.
+
+
+
+---
+
+خامسًا: الألفاظ الأعجمية في القرآن
+
+لا يوجد في القرآن جمل أعجمية.
+
+توجد:
+
+أعلام مثل: إبراهيم.
+
+ألفاظ استعملها العرب فصارت عربية، مثل: جهنم.
+
+
+
+---
+
+سادسًا: سورة الفاتحة – الأساس والمنهج
+
+مكانتها
+
+أمّ القرآن؛ لاشتمالها على أصوله.
+
+كثرة أسمائها دليل على شرفها.
+
+شُرعت قراءتها 17 مرة يوميًّا على الأقل لشدة الحاجة إليها.
+
+
+
+---
+
+سابعًا: الرسائل الكبرى في الفاتحة
+
+1. التعريف بالمعبود.
+
+2. بيان طريق العبودية.
+
+3. بيان أحوال الناس في الطريق.
+
+4. تقرير أصول القرآن ومقاصده.
+
+
+
+---
+
+ثامنًا: قواعد تفسيرية عامة
+
+الأصل حمل معاني القرآن على الظاهر.
+
+إذا احتمل اللفظ أكثر من معنى بلا تعارض، حُمل عليها جميعًا.
+
+القرآن يعبر بالألفاظ القليلة عن المعاني الكثيرة.
+
+
+
+---
+
+تاسعًا: معاني مفردات من الفاتحة
+
+{الله}
+
+اسم مختص لا يُسمى به غيره.
+
+
+{الرحمن – الرحيم}
+
+الرحمن: دال على كثرة الرحمة.
+
+الرحيم: رحمة متعلقة بالمرحوم.
+
+
+الحمد والشكر
+
+الحمد: ثناء مع محبة وتعظيم.
+
+الشكر: أخص من حيث المتعلق، وأعم من حيث الوسيلة.
+
+الثناء: تفصيل الحمد.
+
+المجد: الزيادة في الثناء.
+
+
+{العالمين}
+
+كل ما سوى الله.
+
+
+
+---
+
+تاسعًا: {إياك نعبد وإياك نستعين}
+
+العبادة
+
+من جهة العبد: خضوع وانقياد.
+
+من جهة الأعمال:
+
+> تعريف شيخ الإسلام ابن تيمية:
+اسم جامع لكل ما يحبه الله ويرضاه من الأقوال والأفعال الظاهرة والباطنة.
+
+
+
+
+أركان العبادة
+
+1. المحبة.
+
+
+2. الخضوع.
+
+
+3. الخوف.
+
+
+
+الاستعانة
+
+لا غنى لأحد عنها.
+
+من آداب الدعاء: الثناء على الله قبل السؤال.
+
+
+
+---
+
+عاشرًا: الهداية والصراط
+
+هداية العلم.
+
+هداية عمل (التثبيت).
+
+نحتاج لتكرار طلبها دائمًا.
+
+
+قال الله عز وجل:
+﴿اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ﴾
+
+
+
+---
+
+الحادي عشر: دلائل الإيمان بالله (إجمال)
+
+دلائل الفطرة
+
+كل مولود يولد على الفطرة.
+
+الفطرة صبغة لا تُدفع.
+
+
+قال الله عز وجل:
+﴿فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا﴾
+
+دلائل الخلق
+
+قال الله عز وجل:
+﴿أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمْ الْخَالِقُونَ﴾
+
+يستحيل:
+
+أن يخلق الشيء نفسه.
+
+أن يخلقه مخلوق مثله.
+
+
+فلا بد من خالق غير مخلوق.
+
+
+الإحسان والإتقان
+
+قال الله عز وجل:
+﴿الَّذِي أَحْسَنَ كُلَّ شَيْءٍ خَلَقَهُ﴾
+
+
+
+---
+
+الثاني عشر: بطلان الشرك
+
+الشرك: إشراك غير الله في صفاته أو أفعاله أو أسمائه.
+
+قبيح فطريًّا وعقليًّا وشرعيًّا.
+
+لا يقبل الله طاعةً مع الشرك.
+
+
+قال الله عز وجل:
+﴿فَمَنْ أَظْلَمُ مِمَّنِ افْتَرَى عَلَى اللَّهِ الْكَذِبَ﴾
+
+
+
+---
+
+الخاتمة
+
+القرآن أصل الإيمان ومنبعه.
+
+الفاتحة خلاصة القرآن.
+
+وخلاصتها: إياك نعبد.
+        </div>
+        <footer class="page-footer">خاتمة</footer>
+      </section>
+
+      <!-- فقه الإيمان sections (as provided) -->
+      <section id="iman-1" class="page iman">
+        <header><h3>1) قيمة الإيمان</h3></header>
+        <div class="content">
+الإيمان أغلى ما تملك، وهو معيار الوزن الحقيقي لك.
+
+ما دام معك إيمان: لا تتحسر على فائت من الدنيا.
+
+الإنسان قد يملك علمًا كثيرًا، لكن قيمته عند الله بإيمانه لا بمخزونه المعرفي.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-2" class="page iman">
+        <header><h3>2) أولوية علم الإيمان</h3></header>
+        <div class="content">
+أول علم يُتعلم ويُعتنى به: علم الإيمان.
+
+يسبق الحفظ، ويسبق التوسع، بل يسبق الاشتغال بالصورة دون المعنى.
+
+الخلل في الإيمان يفسد النتائج مهما بدا الشكل صالحًا.
+
+
+> قد يكون حافظ قرآن… لكنه خاسر دينه، إن غاب الإيمان.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-3" class="page iman">
+        <header><h3>3) تعريف فقه الإيمان</h3></header>
+        <div class="content">
+فقه الإيمان هو:
+
+فهم كيف يعمل الإيمان في القلب.
+
+وكيف يتحول إلى دافع، وضابط، ومحرك.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-4" class="page iman">
+        <header><h3>4) أثر الإيمان على الأعمال</h3></header>
+        <div class="content">
+كل أعمالك، طموحاتك، دروسك:
+
+هباء إن لم تتصل بالإيمان.
+
+
+الإيمان هو:
+
+الدافع لترك المحرمات.
+
+المحرك لفعل المأمورات.
+
+القوة الداخلية للطاعة، لا مجرد العادة.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-5" class="page iman">
+        <header><h3>5) الإيمان أساس الدين</h3></header>
+        <div class="content">
+الدين كله قائم على الإيمان، لا العكس.
+
+الإيمان مثل الثوب:
+
+يَبلى.
+
+يحتاج تجديدًا.
+
+
+تجديد الإيمان سؤالٌ ودعاء قبل أن يكون قراءةً وتنظيرًا.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-6" class="page iman">
+        <header><h3>6) مصدر الإيمان</h3></header>
+        <div class="content">
+أصل الإيمان ومنبعه: القرآن.
+
+الإيمان نور، ولا يُطلب من عقول الناس بل من رب الناس.
+
+إنسان بلا قرآن = فراغ قيمي، مهما امتلك من أدوات.
+
+
+> تعليم القرآن قُدِّم على خلق الإنسان:
+لأن الحياة بلا وحي… حياة بلا معنى.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-7" class="page iman">
+        <header><h3>7) منهج التعامل مع القرآن</h3></header>
+        <div class="content">
+أوامر القرآن غالبًا تبدأ بنداء الإيمان:
+
+لأن الامتثال ثمرة إيمان، لا مجرد إلزام.
+
+
+اجعل لك ختمة:
+
+لا تبحث فيها عن عدد الصفحات،
+
+بل عن ثمرات الإيمان في قلبك.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-8" class="page iman">
+        <header><h3>8) طبيعة الإيمان</h3></header>
+        <div class="content">
+الإيمان:
+
+فكرة،
+
+إذا وقرَت في القلب… حكمت الجوارح.
+
+
+ليس مجرد معلومات،
+
+بل يقينٌ يُغيّر الاتجاه.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <section id="iman-9" class="page iman">
+        <header><h3>9) خلاصة فقهية قصيرة</h3></header>
+        <div class="content">
+الإيمان:
+
+يُسبق بالنية،
+
+يُغذّى بالقرآن،
+
+يُحفظ بالعمل،
+
+ويُفقد بالإهمال.
+
+
+كل إصلاح بلا إيمان: مؤقت.
+
+وكل عبادة بلا إيمان: ثقيلة.
+
+وكل علم بلا إيمان: حجة عليك لا لك.
+        </div>
+        <footer class="page-footer">فقه الإيمان</footer>
+      </section>
+
+      <footer class="book-footer">
+        <div></div>
+        <div class="credits">.</div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const openBtn = document.getElementById('openToc');
+    const closeBtn = document.getElementById('closeToc');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar(){
+      sidebar.classList.add('open');
+      overlay.style.display = 'block';
+      sidebar.setAttribute('aria-hidden','false');
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function closeSidebar(){
+      sidebar.classList.remove('open');
+      overlay.style.display = 'none';
+      sidebar.setAttribute('aria-hidden','true');
+      overlay.setAttribute('aria-hidden','true');
+    }
+
+    openBtn.addEventListener('click', openSidebar);
+    closeBtn?.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Smooth scroll for sidebar links (and close sidebar on click)
+    document.querySelectorAll('.sidebar a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const id = this.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          closeSidebar();
+        }
+      });
+    });
+
+    // Ensure Quranic verses use correct font fallback (Amiri loaded above)
+    // No text modifications performed by script - all content is as you provided.
+  </script>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
